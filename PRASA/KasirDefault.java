@@ -5,7 +5,7 @@ public class KasirDefault {
     // Fungsi Scanner
     private static Scanner sc = new Scanner(System.in);
 
-    // Fungsi acak
+    // Fungsi Acak
     private static Random acak = new Random();
 
     // Fungsi Variabel Data Karyawan
