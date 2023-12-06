@@ -12,8 +12,18 @@ public class KasirDefault {
     private static String userKaryawan[] = new String[30];
     private static String passKaryawan[] = new String[30];
 
+    // Fungsi List Menu
+    private static String[] menuKasir = { "Fitur transaksi dan struk", "Membership", "Laporan penjualan", "Booking",
+            "Sistem pembayaran", "Ketentuan diskon", "Pengaturan stok" };
+    private static String[][] subMenuKasir = {
+            { "Pendaftaran pelanggan membership", "Cek nomor membership pelanggan & Benefit",
+                    "List daftar pelanggan membership" },
+            { "Laporan penjualan hari ini", "Laporan penjualan bulan ini (per 30 hari)" },
+            { "Dafttar booking", "List pelanggan booking", "Tandai pelanggan" }, { "Tunai", "Bank transfer" },
+            { "Lihat stok hari ini", "Update stok hari ini", "History stok 30 hari" } };
+
     // Fungsi Variabel Membership
-    private static int jumlahPelanggan = 0; 
+    private static int jumlahPelanggan = 0;
     private static int maxMembership = 12;
     private static String[] namaPelanggan = new String[maxMembership];
     private static String[] nomorMember = new String[maxMembership];
@@ -35,6 +45,7 @@ public class KasirDefault {
     private static String hariDiskon[] = { "Hari Biasa", "Hari Kemerdekaan", "Tahun Baru", "Ramadhan", "Lebaran" };
     private static double diskonHari[][] = { { 0, 0, 0.05 }, { 0.08, 0.17, 0.20 }, { 0.03, 0.07, 0.10 },
             { 0.05, 0.08, 0.11 }, { 0.02, 0.05, 0.09 } };
+    private static String hariKetentuanDiskon[] = new String[30];
     private static int inputHariDiskon;
     private static double penghasilanBulanan = 0;
     private static int i;
@@ -59,7 +70,6 @@ public class KasirDefault {
         String dataUserKaryawan[] = { "albedo", "ainz", "demiurge", "cocytus", "shaltear", "sebas" };
         String dataPassKaryawan[] = { "ainssama", "diamlah", "subarashi", "ojisan", "dearinsaka", "tuanku" };
         int menu;
-        String hariKetentuanDiskon = "";
         boolean kembaliKeLogin = false;
 
         // Loop untuk setiap hari kerja
@@ -116,8 +126,8 @@ public class KasirDefault {
 
                 // Validasi nomor hari yang dimasukkan
                 if (inputHariDiskon >= 1 && inputHariDiskon <= hariDiskon.length) {
-                    hariKetentuanDiskon = hariDiskon[inputHariDiskon - 1];
-                    System.out.println("Anda memilih hari: " + hariKetentuanDiskon);
+                    hariKetentuanDiskon[i] = hariDiskon[inputHariDiskon - 1];
+                    System.out.println("Anda memilih hari: " + hariKetentuanDiskon[i]);
                     inputHariValid = true;
                 } else {
                     System.out.println("Nomor hari tidak valid. Harap masukkan nomor yang sesuai.");
@@ -138,14 +148,10 @@ public class KasirDefault {
             do {
                 System.out.println("===============================================");
                 System.out.println("SELAMAT DATANG DI APLIKASI SALON HARI KE-" + (i + 1));
-                System.out.println("Menu Kasir Hari : " + hariKetentuanDiskon);
-                System.out.println("1. Fitur utama pembayaran dan struk");
-                System.out.println("2. Membership");
-                System.out.println("3. Laporan penjualan");
-                System.out.println("4. Booking");
-                System.out.println("5. Sistem pembayaran");
-                System.out.println("6. Ketentuan diskon");
-                System.out.println("7. Stok hari ini");
+                System.out.println("Menu Kasir Hari : " + hariKetentuanDiskon[i]);
+                for (int ad = 0; ad < menuKasir.length; ad++) {
+                    System.out.println((ad + 1) + ". " + menuKasir[ad]);
+                }
                 System.out.println("0. Keluar");
                 System.out.println("Pilih menu");
                 menu = sc.nextInt();
@@ -316,9 +322,9 @@ public class KasirDefault {
             System.out.println("===============================================");
             System.out.println("MENU MEMBERSHIP");
             System.out.println("===============================================");
-            System.out.println("1. Pendaftaran pelanggan membership");
-            System.out.println("2. Cek nomor membership pelanggan & Benerfit");
-            System.out.println("3. List daftar pelanggan membership");
+            for (int af = 0; af < subMenuKasir[0].length; af++) {
+                System.out.println((af + 1) + ". " + subMenuKasir[0][af]);
+            }
             System.out.println("0. Keluar");
             menuMembership = sc.nextInt();
             System.out.println("===============================================");
@@ -355,54 +361,53 @@ public class KasirDefault {
 
     // Fungsi pendaftaran pelanggan membership
     private static void pendaftaranPelangganMembership(Random acak, int jumlahKustomer, String[] namaPelangganArray,
-        String[] nomorMemberArray, int maxMembership) {
+            String[] nomorMemberArray, int maxMembership) {
 
-    if (jumlahPelanggan >= maxMembership) {
-        System.out.println("===============================================");
-        System.out.println("Maaf, membership bulan ini sudah terisi semua.");
-        return;
-    }
-    System.out.println("===============================================");
-    System.out.println("Pendaftaran Pelanggan Membership");
-    System.out.println("===============================================");
-    System.out.print("Nama Pelanggan: ");
-    String nama = sc.next();
-    boolean namaSudahTerdaftar = false;
-
-    for (int n = 0; n < jumlahPelanggan; n++) {
-        if (nama.equals(namaPelangganArray[n])) {
-            namaSudahTerdaftar = true;
-            break;
+        if (jumlahPelanggan >= maxMembership) {
+            System.out.println("===============================================");
+            System.out.println("Maaf, membership bulan ini sudah terisi semua.");
+            return;
         }
-    }
+        System.out.println("===============================================");
+        System.out.println("Pendaftaran Pelanggan Membership");
+        System.out.println("===============================================");
+        System.out.print("Nama Pelanggan: ");
+        String nama = sc.next();
+        boolean namaSudahTerdaftar = false;
 
-    if (!namaSudahTerdaftar) {
-        // Generate nomor member secara acak
-        String karakter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder nomorMemberBaru = new StringBuilder();
-
-        for (int o = 0; o < 8; o++) {
-            int index = acak.nextInt(karakter.length());
-            nomorMemberBaru.append(karakter.charAt(index));
+        for (int n = 0; n < jumlahPelanggan; n++) {
+            if (nama.equals(namaPelangganArray[n])) {
+                namaSudahTerdaftar = true;
+                break;
+            }
         }
 
-        namaPelangganArray[jumlahPelanggan] = nama;
-        nomorMemberArray[jumlahPelanggan] = nomorMemberBaru.toString();
-        System.out.println("===============================================");
-        System.out.println("Pendaftaran berhasil!\n");
-        System.out.println("===============================================");
-        System.out.println("Nama Pelanggan : " + namaPelangganArray[jumlahPelanggan]);
-        System.out.println("Nomor Member : " + nomorMemberArray[jumlahPelanggan]);
-        System.out.println("===============================================");
-        jumlahPelanggan++;
-    } else {
-        System.out.println("===============================================");
-        System.out.println("Nama pelanggan sudah terdaftar");
-        System.out.println("===============================================");
+        if (!namaSudahTerdaftar) {
+            // Generate nomor member secara acak
+            String karakter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            StringBuilder nomorMemberBaru = new StringBuilder();
+
+            for (int o = 0; o < 8; o++) {
+                int index = acak.nextInt(karakter.length());
+                nomorMemberBaru.append(karakter.charAt(index));
+            }
+
+            namaPelangganArray[jumlahPelanggan] = nama;
+            nomorMemberArray[jumlahPelanggan] = nomorMemberBaru.toString();
+            System.out.println("===============================================");
+            System.out.println("Pendaftaran berhasil!\n");
+            System.out.println("===============================================");
+            System.out.println("Nama Pelanggan : " + namaPelangganArray[jumlahPelanggan]);
+            System.out.println("Nomor Member : " + nomorMemberArray[jumlahPelanggan]);
+            System.out.println("===============================================");
+            jumlahPelanggan++;
+        } else {
+            System.out.println("===============================================");
+            System.out.println("Nama pelanggan sudah terdaftar");
+            System.out.println("===============================================");
+        }
+
     }
-
-}
-
 
     // Fungsi cek nomor membership dan benefit
     private static void cekNomorMembership() {
@@ -476,8 +481,9 @@ public class KasirDefault {
             System.out.println("===============================================");
             System.out.println("MENU LAPORAN PENJUALAN");
             System.out.println("===============================================");
-            System.out.println("1. Laporan penjualan hari ini");
-            System.out.println("2. Laporan penjualan bulan ini (per 30 hari)");
+            for (int ag = 0; ag < subMenuKasir[1].length; ag++) {
+                System.out.println((ag + 1) + ". " + subMenuKasir[1][ag]);
+            }
             System.out.println("0. Keluar");
             System.out.println("Pilih menu");
             menuLaporan = sc.nextInt();
@@ -513,7 +519,7 @@ public class KasirDefault {
     private static void laporanPenjualanHariIni(int hariKe) {
         System.out.println("===============================================");
         System.out.println("LAPORAN PENJUALAN HARI INI");
-        System.out.println("Hari ke-" + (hariKe + 1));
+        System.out.println("Hari ke-" + (hariKe + 1) + " : " + (hariKetentuanDiskon[hariKe]));
         System.out.println("Kasir yang bertanggung jawab : " + (userKaryawan[hariKe]));
         System.out.println("===============================================");
         System.out.println("Penghasilan pelayanan potong : " + (penjualanPotong[hariKe]));
@@ -531,7 +537,7 @@ public class KasirDefault {
         System.out.println("Laporan penjualan bulan ini (per 30 hari)");
         for (int p = 0; p <= i; p++) {
             System.out.println("===============================================");
-            System.out.println("Hari ke-" + (p + 1));
+            System.out.println("Hari ke-" + (p + 1) + " : " + (hariKetentuanDiskon[p]));
             System.out.println("Kasir yang bertanggung jawab : " + (userKaryawan[p]));
             System.out.println("===============================================");
             System.out.println("Penghasilan pelayanan potong : " + (penjualanPotong[p]));
@@ -557,9 +563,9 @@ public class KasirDefault {
             System.out.println("===============================================");
             System.out.println("MENU BOOKING :");
             System.out.println("===============================================");
-            System.out.println("1. Daftar booking");
-            System.out.println("2. List pelanggan booking");
-            System.out.println("3. Tandai pelanggan");
+            for (int ah = 0; ah < subMenuKasir[2].length; ah++) {
+                System.out.println((ah + 1) + ". " + subMenuKasir[2][ah]);
+            }
             System.out.println("0. Keluar");
             menuBooking = sc.nextInt();
             System.out.println("===============================================");
@@ -673,8 +679,9 @@ public class KasirDefault {
             System.out.println("===============================================");
             System.out.println("MENU SISTEM PEMABAYARAN");
             System.out.println("===============================================");
-            System.out.println("1. Tunai");
-            System.out.println("2. Bank transfer");
+            for (int ai = 0; ai < subMenuKasir[3].length; ai++) {
+                System.out.println((ai + 1) + ". " + subMenuKasir[3][ai]);
+            }
             System.out.println("0. Keluar");
             menuSistemPembayaran = sc.nextInt();
             System.out.println("===============================================");
@@ -721,9 +728,12 @@ public class KasirDefault {
         System.out.println("Minimal Pembelian dan Diskon");
         System.out.println("===============================================");
         System.out.printf("%-20s %-15s\n", "Minimal Pembelian", "Diskon");
-        System.out.printf("%-20s %-15s\n", "Rp. 100 RB keatas", diskonHari[inputHariDiskon - 1][0] + "%");
-        System.out.printf("%-20s %-15s\n", "Rp. 200 RB keatas", diskonHari[inputHariDiskon - 1][1] + "%");
-        System.out.printf("%-20s %-15s\n", "Rp. 300 RB keatas", diskonHari[inputHariDiskon - 1][2] + "%");
+        System.out.printf("%-20s %-15s\n", "Rp. 100 RB keatas",
+                ((int) (diskonHari[inputHariDiskon - 1][0] * 100)) + "%");
+        System.out.printf("%-20s %-15s\n", "Rp. 200 RB keatas",
+                ((int) (diskonHari[inputHariDiskon - 1][1] * 100)) + "%");
+        System.out.printf("%-20s %-15s\n", "Rp. 300 RB keatas",
+                ((int) (diskonHari[inputHariDiskon - 1][2] * 100)) + "%");
         System.out.println("===============================================");
 
     }
@@ -738,9 +748,9 @@ public class KasirDefault {
             System.out.println("===============================================");
             System.out.println("PENGATURAN STOK");
             System.out.println("===============================================");
-            System.out.println("1. Lihat stok hari ini");
-            System.out.println("2. Update stok hari ini");
-            System.out.println("3. History stok 30 hari");
+            for (int aj = 0; aj < subMenuKasir[4].length; aj++) {
+                System.out.println((aj + 1) + ". " + subMenuKasir[4][aj]);
+            }
             System.out.println("0. Keluar");
             menuStok = sc.nextInt();
             System.out.println("===============================================");
@@ -804,7 +814,5 @@ public class KasirDefault {
             System.out.printf("%-20d %-15d %-15d\n", (ad + 1), stokSampo[ad], stokMakeUp[ad]);
             System.out.println("===============================================");
         }
-
     }
-
 }
