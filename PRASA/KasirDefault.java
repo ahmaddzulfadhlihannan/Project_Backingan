@@ -145,7 +145,7 @@ public class KasirDefault {
                 System.out.println("4. Booking");
                 System.out.println("5. Sistem pembayaran");
                 System.out.println("6. Ketentuan diskon");
-                System.out.println("7. Stok hari ini");
+                System.out.println("7. Pengaturan stok");
                 System.out.println("0. Keluar");
                 System.out.println("Pilih menu");
                 menu = sc.nextInt();
