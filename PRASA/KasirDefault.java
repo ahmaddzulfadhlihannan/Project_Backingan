@@ -295,7 +295,7 @@ public class KasirDefault {
 
         // Item details
         for (int k = 0; k < nomorItem.length; k++) {
-            if (nomorItem[k] == 0) {
+            if (nomorItem[k] == 0 || nomorItem[k] > namaJenisPelayanan.length) {
                 break;
             }
 
