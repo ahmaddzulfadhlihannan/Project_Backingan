@@ -321,6 +321,7 @@ public class KasirDefault {
             // Fitur Membership
             System.out.println("===============================================");
             System.out.println("MENU MEMBERSHIP");
+            System.out.println("Sisa Membership Bulan Ini : " + (maxMembership - jumlahPelanggan));
             System.out.println("===============================================");
             for (int af = 0; af < subMenuKasir[0].length; af++) {
                 System.out.println((af + 1) + ". " + subMenuKasir[0][af]);
